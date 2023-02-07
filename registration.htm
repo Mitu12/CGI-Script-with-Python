@@ -1,0 +1,130 @@
+<html>
+<head>
+    <title>Registration</title>
+    <style>
+        table {
+            background-color: #F2F3F4;
+            padding: 15px;
+            font-size: 20px;
+        }
+        #fname, #lname, #email, #pswd1, #pswd2, #spswd{
+            height: 25px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            padding-left: 15px;
+            font-size: 18px;
+        }
+        #button{
+            font-size: 16px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        input {
+            border: 1px solid lightgrey;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function emailValidate() {
+            var email=document.forms["form1"]["email"].value;
+			var dotpos=email.lastIndexOf(".");
+			var atpos=email.indexOf("@");
+			if(atpos<1 || dotpos-atpos<2 || dotpos+2>=email.length)
+			{
+				alert( "Please provide a valid Email!" );
+				document.forms["form1"]["email"].focus();
+				return false;
+			}
+        }
+        function pswdValidate() {
+            var pswd1 = document.forms["form1"]["pswd1"].value;
+            var pswd2 = document.forms["form1"]["pswd2"].value;
+            if (pswd1 != pswd2) {
+                alert( "Passwords dont match." );
+				document.forms["form1"]["pswd1"].focus();
+				return false;
+            }
+        }
+        function showpswd() { 
+            var pswd1 = document.form1.pswd1;
+            var pswd2 = document.form1.pswd2;
+            if (pswd1.type === "password") { 
+                pswd1.type = "text";
+                pswd2.type = "text"; 
+            } 
+            else { 
+                pswd1.type = "password";
+                pswd2.type = "password";
+            } 
+        } 
+    </script>
+</head>
+<body style="background-image: url('http://127.0.0.1/img/login_bg_image.jpg');">
+    <center>
+	    <form name="form1" onsubmit="return emailValidate(), pswdValidate()" method="post" action="cgi-bin/registration.py" style="background-color: white; padding:20px; width: 50%">
+	    	<h3>Registration</h3>
+		<table>
+		    <tr>
+			<td style="width:175px">
+			    First name
+			</td>
+			<td>
+			    <input type="text" id="fname" name="fname" required>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    Last name
+			</td>
+			<td>
+			    <input type="text" id="lname" name="lname" required>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    E-mail
+			</td>
+			<td>
+			    <input type="email" id="email" name="email" required>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    Type Password
+			</td>
+			<td>
+			    <input type="password" name="pswd1" id="pswd1" required>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    Re-type Password
+			</td>
+			<td>
+			    <input type="password" name="pswd2" id="pswd2" onfocusout="pswdValidate()" required>
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    Show password
+			</td>
+			<td>
+			    <input type="checkbox" name="spswd" id="spswd" onclick="showpswd()">
+			</td>
+		    </tr>
+		    <tr>
+			<td>
+			    <input type="submit" value="Submit now" id="button">
+			</td>
+			<td>
+			    <input type="reset" value="Reset" id="button">
+			</td>
+		    </tr>
+		</table>
+		<a href="http://127.0.0.1/login.htm">Login instead</a>
+	    </form>
+    <center>
+</body>
+</html>
